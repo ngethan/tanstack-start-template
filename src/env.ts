@@ -1,7 +1,9 @@
 import { createEnv } from "@t3-oss/env-core";
+import { vercel } from "@t3-oss/env-core/presets-zod";
 import { z } from "zod";
 
 export const env = createEnv({
+	extends: [vercel()],
 	server: {
 		SERVER_URL: z.string().url().optional(),
 		DATABASE_URL: z.string().url(),
