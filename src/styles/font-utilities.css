@@ -1,0 +1,65 @@
+@layer utilities {
+	.font-sans {
+		font-family: "Neue Montreal", -apple-system, BlinkMacSystemFont, "Segoe UI",
+			"Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+			"Helvetica Neue", sans-serif;
+	}
+
+	.font-mono {
+		font-family: "RM Mono", source-code-pro, Menlo, Monaco, Consolas,
+			"Courier New", monospace;
+	}
+
+	.font-display {
+		font-family: "Neue Montreal", -apple-system, BlinkMacSystemFont, "Segoe UI",
+			"Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+			"Helvetica Neue", sans-serif;
+	}
+
+	/* Neue Montreal specific weight classes */
+	.font-montreal-light {
+		font-family: "Neue Montreal", sans-serif;
+		font-weight: 300;
+	}
+
+	.font-montreal-regular {
+		font-family: "Neue Montreal", sans-serif;
+		font-weight: 400;
+	}
+
+	.font-montreal-medium {
+		font-family: "Neue Montreal", sans-serif;
+		font-weight: 500;
+	}
+
+	.font-montreal-bold {
+		font-family: "Neue Montreal", sans-serif;
+		font-weight: 700;
+	}
+
+	/* RM Mono specific weight classes */
+	.font-mono-light {
+		font-family: "RM Mono", monospace;
+		font-weight: 300;
+	}
+
+	.font-mono-regular {
+		font-family: "RM Mono", monospace;
+		font-weight: 400;
+	}
+
+	.font-mono-semibold {
+		font-family: "RM Mono", monospace;
+		font-weight: 600;
+	}
+
+	.font-mono-bold {
+		font-family: "RM Mono", monospace;
+		font-weight: 700;
+	}
+
+	.font-mono-black {
+		font-family: "RM Mono", monospace;
+		font-weight: 900;
+	}
+}

@@ -1,0 +1,105 @@
+/* Neue Montreal Font Family */
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-Light.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: italic;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-LightItalic.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-Regular.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-Italic.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-Medium.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-MediumItalic.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-Bold.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/NeueMontreal-BoldItalic.otf") format("opentype");
+}
+
+/* RM Mono Font Family */
+@font-face {
+	font-family: "RM Mono";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/RMMono-Light.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "RM Mono";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/RMMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "RM Mono";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/RMMono-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "RM Mono";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/RMMono-Bold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "RM Mono";
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url("/fonts/RMMono-Black.woff2") format("woff2");
+}
