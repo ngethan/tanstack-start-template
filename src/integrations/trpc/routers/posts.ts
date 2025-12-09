@@ -24,6 +24,7 @@ export const postsRouter = createTRPCRouter({
 			z.object({
 				limit: z.number().min(1).max(50).default(20),
 				cursor: z.string().optional(),
+				userId: z.string().optional(),
 			}),
 		)
 		.query(async ({ input }) => {
@@ -38,6 +39,7 @@ export const postsRouter = createTRPCRouter({
 				})
 				.from(posts)
 				.innerJoin(users, eq(posts.userId, users.id))
+				.where(input.userId ? eq(posts.userId, input.userId) : undefined)
 				.orderBy(desc(posts.createdAt))
 				.limit(input.limit + 1);
 

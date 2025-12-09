@@ -2,7 +2,13 @@ import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/integrations/trpc/react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { FileText, MessageSquare, PlusCircle, Settings } from "lucide-react";
+import {
+	FileText,
+	Loader2,
+	MessageSquare,
+	PlusCircle,
+	Settings,
+} from "lucide-react";
 
 export const Route = createFileRoute("/dashboard/_dashboardLayout/")({
 	component: DashboardHome,
@@ -11,8 +17,8 @@ export const Route = createFileRoute("/dashboard/_dashboardLayout/")({
 function DashboardHome() {
 	const trpc = useTRPC();
 	const { data: user } = useQuery(trpc.user.me.queryOptions());
-	const { data: postsData } = useQuery(
-		trpc.posts.list.queryOptions({ limit: 5 }),
+	const { data: postsData, isLoading: isLoadingPosts } = useQuery(
+		trpc.posts.list.queryOptions({ limit: 5, userId: user?.id }),
 	);
 
 	return (
@@ -55,41 +61,46 @@ function DashboardHome() {
 				/>
 			</div>
 
-			{/* Recent Posts */}
+			{/* Your Posts */}
 			<div>
 				<div className="flex items-center justify-between mb-4">
-					<h2 className="text-lg font-semibold">Recent Posts</h2>
+					<h2 className="text-lg font-semibold">Your Posts</h2>
 					<Button asChild variant="ghost" size="sm">
 						<Link to="/dashboard/posts">View all</Link>
 					</Button>
 				</div>
-				<div className="rounded-lg border bg-card">
-					{postsData?.posts && postsData.posts.length > 0 ? (
-						<div className="divide-y">
-							{postsData.posts.map((post) => (
-								<div key={post.id} className="p-4">
-									<h3 className="font-medium">{post.title}</h3>
-									<p className="text-sm text-muted-foreground line-clamp-2 mt-1">
-										{post.content}
-									</p>
-									<div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
-										<span>{post.user.name}</span>
-										<span>•</span>
-										<span>{post.commentCount} comments</span>
-									</div>
+				{isLoadingPosts ? (
+					<div className="p-8 flex items-center justify-center rounded-lg border bg-card">
+						<Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+					</div>
+				) : postsData?.posts && postsData.posts.length > 0 ? (
+					<div className="space-y-3">
+						{postsData.posts.map((post) => (
+							<Link
+								key={post.id}
+								to="/dashboard/posts/$postId"
+								params={{ postId: post.id }}
+								className="block p-4 rounded-lg border bg-card transition-colors hover:bg-accent"
+							>
+								<h3 className="font-medium">{post.title}</h3>
+								<p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+									{post.content}
+								</p>
+								<div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+									<span>{post.commentCount} comments</span>
 								</div>
-							))}
-						</div>
-					) : (
-						<div className="p-8 text-center text-muted-foreground">
-							<FileText className="h-8 w-8 mx-auto mb-2 opacity-50" />
-							<p>No posts yet. Be the first to create one!</p>
-							<Button asChild variant="outline" size="sm" className="mt-4">
-								<Link to="/dashboard/posts/new">Create Post</Link>
-							</Button>
-						</div>
-					)}
-				</div>
+							</Link>
+						))}
+					</div>
+				) : (
+					<div className="p-8 text-center text-muted-foreground rounded-lg border bg-card">
+						<FileText className="h-8 w-8 mx-auto mb-2 opacity-50" />
+						<p>You haven't created any posts yet.</p>
+						<Button asChild variant="outline" size="sm" className="mt-4">
+							<Link to="/dashboard/posts/new">Create Post</Link>
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

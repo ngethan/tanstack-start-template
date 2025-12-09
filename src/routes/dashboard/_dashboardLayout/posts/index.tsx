@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/integrations/trpc/react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { FileText, MessageSquare, PlusCircle } from "lucide-react";
+import { FileText, Loader2, MessageSquare, PlusCircle } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard/_dashboardLayout/posts/")({
 	component: PostsPage,
@@ -29,55 +29,53 @@ function PostsPage() {
 				</Button>
 			</div>
 
-			<div className="rounded-lg border bg-card">
-				{isLoading ? (
-					<div className="p-8 text-center text-muted-foreground">
-						Loading posts...
-					</div>
-				) : data?.posts && data.posts.length > 0 ? (
-					<div className="divide-y">
-						{data.posts.map((post) => (
-							<Link
-								key={post.id}
-								to="/dashboard/posts/$postId"
-								params={{ postId: post.id }}
-								className="block p-4 hover:bg-accent transition-colors"
-							>
-								<div className="flex items-start justify-between gap-4">
-									<div className="min-w-0 flex-1">
-										<h3 className="font-medium truncate">{post.title}</h3>
-										<p className="text-sm text-muted-foreground line-clamp-2 mt-1">
-											{post.content}
-										</p>
-										<div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-											<span>By {post.user.name}</span>
-											<span className="flex items-center gap-1">
-												<MessageSquare className="h-3 w-3" />
-												{post.commentCount} comments
-											</span>
-										</div>
+			{isLoading ? (
+				<div className="p-8 flex items-center justify-center rounded-lg border bg-card">
+					<Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+				</div>
+			) : data?.posts && data.posts.length > 0 ? (
+				<div className="space-y-3">
+					{data.posts.map((post) => (
+						<Link
+							key={post.id}
+							to="/dashboard/posts/$postId"
+							params={{ postId: post.id }}
+							className="block p-4 rounded-lg border bg-card transition-colors hover:bg-accent"
+						>
+							<div className="flex items-start justify-between gap-4">
+								<div className="min-w-0 flex-1">
+									<h3 className="font-medium truncate">{post.title}</h3>
+									<p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+										{post.content}
+									</p>
+									<div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+										<span>By {post.user.name}</span>
+										<span className="flex items-center gap-1">
+											<MessageSquare className="h-3 w-3" />
+											{post.commentCount} comments
+										</span>
 									</div>
-									{post.imageUrl && (
-										<img
-											src={post.imageUrl}
-											alt=""
-											className="w-20 h-20 rounded object-cover shrink-0"
-										/>
-									)}
 								</div>
-							</Link>
-						))}
-					</div>
-				) : (
-					<div className="p-8 text-center text-muted-foreground">
-						<FileText className="h-8 w-8 mx-auto mb-2 opacity-50" />
-						<p>No posts yet. Be the first to create one!</p>
-						<Button asChild variant="outline" size="sm" className="mt-4">
-							<Link to="/dashboard/posts/new">Create Post</Link>
-						</Button>
-					</div>
-				)}
-			</div>
+								{post.imageUrl && (
+									<img
+										src={post.imageUrl}
+										alt=""
+										className="w-20 h-20 rounded object-cover shrink-0"
+									/>
+								)}
+							</div>
+						</Link>
+					))}
+				</div>
+			) : (
+				<div className="p-8 text-center text-muted-foreground rounded-lg border bg-card">
+					<FileText className="h-8 w-8 mx-auto mb-2 opacity-50" />
+					<p>No posts yet. Be the first to create one!</p>
+					<Button asChild variant="outline" size="sm" className="mt-4">
+						<Link to="/dashboard/posts/new">Create Post</Link>
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -62,7 +62,9 @@ export function CommentForm({
 	const charsRemaining = MAX_CHARS - content.length;
 	const isOverLimit = charsRemaining < 0;
 	const isBusy = isSubmitting || isUploading || uploadMutation.isPending;
-	const canSubmit = content.trim().length > 0 && !isOverLimit && !isBusy;
+	const hasMedia = imageUrl !== null || gifUrl !== null;
+	const canSubmit =
+		(content.trim().length > 0 || hasMedia) && !isOverLimit && !isBusy;
 
 	const handleSubmit = useCallback(
 		async (e: React.FormEvent) => {

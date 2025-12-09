@@ -64,11 +64,11 @@ export function CommentsSection({ postId }: { postId: string }) {
 	// Create comment mutation
 	const createMutation = useMutation(
 		trpc.comments.create.mutationOptions({
-			onSuccess: () => {
-				queryClient.invalidateQueries({
-					queryKey: trpc.comments.list.queryKey({ postId }),
+			onSuccess: async () => {
+				await queryClient.refetchQueries({
+					queryKey: trpc.comments.list.infiniteQueryKey({ postId, limit: 20 }),
 				});
-				queryClient.invalidateQueries({
+				await queryClient.refetchQueries({
 					queryKey: trpc.comments.getCount.queryKey({ postId }),
 				});
 				toast.success("Comment posted!");

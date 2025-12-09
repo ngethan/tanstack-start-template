@@ -200,13 +200,22 @@ export const commentsRouter = createTRPCRouter({
 	 */
 	create: rateLimitedProcedure.default
 		.input(
-			z.object({
-				postId: z.string(),
-				content: z.string().min(1).max(MAX_COMMENT_LENGTH),
-				imageUrl: z.string().url().optional(),
-				gifUrl: z.string().url().optional(),
-				parentId: z.string().optional(),
-			}),
+			z
+				.object({
+					postId: z.string(),
+					content: z.string().max(MAX_COMMENT_LENGTH),
+					imageUrl: z.string().url().optional(),
+					gifUrl: z.string().url().optional(),
+					parentId: z.string().optional(),
+				})
+				.refine(
+					(data) =>
+						data.content.trim().length > 0 || data.imageUrl || data.gifUrl,
+					{
+						message: "Comment must have text or media",
+						path: ["content"],
+					},
+				),
 		)
 		.mutation(async ({ ctx, input }) => {
 			// Verify post exists
