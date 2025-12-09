@@ -9,11 +9,9 @@ import {
 	twoFactorClient,
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import { getBaseURL } from "../utils";
 import { ac, admin, member, owner } from "./permissions";
 
 export const authClient = createAuthClient({
-	baseURL: getBaseURL(),
 	plugins: [
 		anonymousClient(),
 		organizationClient({
