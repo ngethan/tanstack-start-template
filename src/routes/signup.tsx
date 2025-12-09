@@ -6,7 +6,7 @@ import { authClient } from "@/lib/auth/client";
 import { redirectIfAuthenticated } from "@/lib/auth/server";
 import { getBaseURL } from "@/lib/utils";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Check, Eye, EyeOff, Loader2, X } from "lucide-react";
+import { ArrowLeft, Check, Eye, EyeOff, Loader2, User, X } from "lucide-react";
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -126,6 +126,28 @@ function SignupPage() {
 		}
 	};
 
+	const handleAnonymousSignIn = async () => {
+		setIsLoading(true);
+
+		try {
+			await authClient.signIn.anonymous({
+				fetchOptions: {
+					onSuccess: () => {
+						window.location.href = "/dashboard";
+					},
+					onError: (ctx) => {
+						toast.error(ctx.error.message);
+						setIsLoading(false);
+					},
+				},
+			});
+		} catch (err) {
+			console.error("Anonymous signin error:", err);
+			toast.error("Failed to continue as guest. Please try again.");
+			setIsLoading(false);
+		}
+	};
+
 	return (
 		<div className="min-h-screen bg-background flex items-center justify-center p-4 relative">
 			<Link
@@ -193,6 +215,17 @@ function SignupPage() {
 							/>
 						</svg>
 						Google
+					</Button>
+
+					<Button
+						type="button"
+						variant="outline"
+						className="w-full h-12"
+						onClick={handleAnonymousSignIn}
+						disabled={isLoading}
+					>
+						<User className="mr-2 h-4 w-4" />
+						Continue as Guest
 					</Button>
 
 					<div className="flex items-center gap-3 text-xs uppercase">

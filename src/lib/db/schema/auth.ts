@@ -14,6 +14,7 @@ export const users = pgTable("users", {
 	twoFactorEnabled: boolean("two_factor_enabled").default(false),
 	phoneNumber: text("phone_number").unique(),
 	phoneNumberVerified: boolean("phone_number_verified"),
+	isAnonymous: boolean("is_anonymous").default(false),
 });
 
 export const sessions = pgTable("sessions", {

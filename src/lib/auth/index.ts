@@ -12,6 +12,7 @@ import { generateRandomAvatar } from "@/lib/utils/avatar";
 import { type User, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
+	anonymous,
 	// captcha,
 	oneTap,
 	organization,
@@ -36,6 +37,9 @@ export const auth = betterAuth({
 		// 	secretKey: env.TURNSTILE_SECRET_KEY,
 		// }),
 		reactStartCookies(),
+		anonymous({
+			emailDomainName: "anon.localhost",
+		}),
 		twoFactor(),
 		phoneNumber({
 			sendOTP: ({ phoneNumber, code }, request) => {

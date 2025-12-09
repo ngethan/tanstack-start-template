@@ -1,6 +1,7 @@
 import { env } from "@/env";
 import type { auth } from "@/lib/auth";
 import {
+	anonymousClient,
 	inferOrgAdditionalFields,
 	oneTapClient,
 	organizationClient,
@@ -14,6 +15,7 @@ import { ac, admin, member, owner } from "./permissions";
 export const authClient = createAuthClient({
 	baseURL: getBaseURL(),
 	plugins: [
+		anonymousClient(),
 		organizationClient({
 			schema: inferOrgAdditionalFields<typeof auth>(),
 			ac,
