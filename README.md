@@ -2,6 +2,8 @@
 
 A production-ready full-stack template built with TanStack Start, featuring authentication, organizations, tRPC, and everything you need to ship fast.
 
+![TanStack Starter Landing Page](public/landing.png)
+
 ## Tech Stack
 
 ### Framework & Routing

@@ -46,6 +46,18 @@ function HomePage() {
 				</div>
 			</section>
 
+			{/* Demo Video */}
+			<div className="w-full max-w-6xl mx-auto px-6 -mt-16">
+				<video
+					src="/tanstack-starter-recording.mp4"
+					autoPlay
+					muted
+					loop
+					playsInline
+					className="w-full rounded-xl border shadow-2xl"
+				/>
+			</div>
+
 			{/* Features Section */}
 			<section className="py-24 px-6 md:px-10">
 				<div className="mx-auto max-w-6xl">
