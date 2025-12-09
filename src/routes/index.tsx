@@ -13,7 +13,7 @@ function HomePage() {
 	const { data: session } = authClient.useSession();
 
 	return (
-		<main className="relative min-h-screen text-gray-100 antialiased bg-background">
+		<main className="dark relative min-h-screen text-gray-100 antialiased bg-background">
 			<Header authenticated={!!session} />
 
 			{/* Hero Section */}
