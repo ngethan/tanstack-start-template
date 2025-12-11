@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { UserAccountDropdown } from "@/components/user-account-dropdown";
 import { appConfig } from "@/config/app";
 import { authClient } from "@/lib/auth/client";
@@ -17,7 +18,7 @@ function HomePage() {
 			<Header authenticated={!!session} />
 
 			{/* Hero Section */}
-			<section className="relative flex min-h-[80vh] flex-col items-center justify-center px-6 pt-20 md:px-10">
+			<section className="relative flex flex-col items-center justify-center px-6 pt-32 pb-12 md:px-10">
 				<div className="mx-auto max-w-4xl text-center">
 					<h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
 						Build Your Next App
@@ -27,7 +28,7 @@ function HomePage() {
 						A production-ready template with authentication, organizations,
 						tRPC, and everything you need to ship fast.
 					</p>
-					<div className="mt-10 flex items-center justify-center gap-4">
+					<div className="mt-8 flex items-center justify-center gap-4">
 						{session ? (
 							<Button asChild size="lg">
 								<Link to="/dashboard">Go to Dashboard</Link>
@@ -47,7 +48,7 @@ function HomePage() {
 			</section>
 
 			{/* Demo Video */}
-			<div className="w-full max-w-6xl mx-auto px-6 -mt-16">
+			<div className="w-full max-w-6xl mx-auto px-6">
 				<video
 					src="/tanstack-starter-recording.mp4"
 					autoPlay
@@ -125,11 +126,13 @@ function FeatureCard({
 	description: string;
 }) {
 	return (
-		<div className="rounded-lg border bg-card p-6 shadow-sm">
-			<div className="mb-4 text-primary">{icon}</div>
-			<h3 className="font-semibold mb-2">{title}</h3>
-			<p className="text-sm text-muted-foreground">{description}</p>
-		</div>
+		<Card>
+			<CardContent className="p-6">
+				<div className="mb-4 text-primary">{icon}</div>
+				<h3 className="font-semibold mb-2">{title}</h3>
+				<p className="text-sm text-muted-foreground">{description}</p>
+			</CardContent>
+		</Card>
 	);
 }
 
